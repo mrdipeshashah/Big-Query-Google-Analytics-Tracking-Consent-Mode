@@ -1,0 +1,10 @@
+SELECT
+  event_date,
+  privacy_info.analytics_storage,
+  privacy_info.ads_storage,
+  COUNT(*) AS event_count
+FROM
+  `enter.tablename_123456.events_*`
+WHERE
+  _TABLE_SUFFIX BETWEEN '20250320' AND '20250322'
+GROUP BY 1, 2,3;
