@@ -1,0 +1,13 @@
+select
+  privacy_info.analytics_storage,
+  privacy_info.ads_storage,
+  count(*) as events_total,
+  count(distinct user_pseudo_id) as users,
+  count(distinct concat(user_pseudo_id,(select value.int_value from unnest(event_params) where key = 'ga_session_id'))) as sessions
+from
+  `enter.tablename_123456.events_*`
+WHERE
+  _TABLE_SUFFIX BETWEEN '20250320' AND '20250322'
+group by
+  analytics_storage,
+  ads_storage
