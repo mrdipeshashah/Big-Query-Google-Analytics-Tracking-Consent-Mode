@@ -8,6 +8,4 @@ from
   `enter.tablename_123456.events_*`
 WHERE
   _TABLE_SUFFIX BETWEEN '20250320' AND '20250322'
-group by
-  analytics_storage,
-  ads_storage
+GROUP BY 1, 2;
