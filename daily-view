@@ -2,7 +2,9 @@ SELECT
   event_date,
   privacy_info.analytics_storage,
   privacy_info.ads_storage,
-  COUNT(*) AS event_count
+  COUNT(*) AS event_count,
+  count(distinct user_pseudo_id) as users,
+  count(distinct concat(user_pseudo_id,(select value.int_value from unnest(event_params) where key = 'ga_session_id'))) as sessions
 FROM
   `enter.tablename_123456.events_*`
 WHERE
