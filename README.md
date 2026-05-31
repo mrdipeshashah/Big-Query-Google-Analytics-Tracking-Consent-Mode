@@ -19,7 +19,7 @@ When analyzing raw event data inside Google BigQuery, understanding the architec
 
 ## THE AUDIT MATRIX: FRONTEND V CLOUD WAREHOUSE 
 
-This master reference grid maps out exactly how browser-layer network requests (`gcs` string payloads) cross-reference to your BigQuery database outputs, along with the technical translation for each combination.
+This master reference grid maps out exactly how browser-layer network requests (`gcs` string payloads) cross-reference to BigQuery outputs, with technical translation for each combination.
 
 | GCS Payload Code | Ad Storage State | Analytics State | BigQuery `ads_storage` | BigQuery `analytics_storage` | Operational Framework State & Sales Insight |
 | :---: | :---: | :---: | :---: | :---: | :--- |
