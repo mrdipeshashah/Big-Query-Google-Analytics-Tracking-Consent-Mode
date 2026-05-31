@@ -1,5 +1,3 @@
-The BQ code shared is to better understand consent mode and what selection users made around analytics_storage and ads_storage. If Advanced Consent Mode is implemented the values of analytics_storage and ads_storage it could be a mix of Yes, No or null.
-
 # OVERVIEW
 This repository contains Big Query code using Google Analytics raw data allowing to track **Consent Mode v2**. It is engineered specifically to validate **Consent Mode v2** configurations, and spot compliance leaks at scale.
 
