@@ -3,19 +3,7 @@ The BQ code shared is to better understand consent mode and what selection users
 # OVERVIEW
 This repository contains Big Query code using Google Analytics raw data allowing to track **Consent Mode v2**. It is engineered specifically to validate **Consent Mode v2** configurations, and spot compliance leaks at scale.
 
-## DAY PART DEFINITIONS
-The data is segmented into the following buckets:
-* **Early Risers**: 4 AM - 5 AM
-* **Breakfast**: 6 AM - 9 AM
-* **Morning**: 10 AM - 11 AM
-* **Lunchtime**: 12 PM - 2 PM
-* **Afternoon**: 3 PM - 4 PM
-* **Early Evening**: 5 PM - 7 PM
-* **Evening**: 8 PM - 11 PM
-* **Lates**: 12 AM - 3 AM
-
-## 📖 The Technical Mechanics: How the Code Recognizes Consent Mode v2
-
+## The Technical Mechanics: How the Code Recognizes Consent Mode v2
 When analyzing raw event data inside Google BigQuery, understanding the architectural shifts between Consent Mode v1 and v2 is vital. Google did not modify the flat database schema to add explicit columns for the new v2 privacy fields (`ad_user_data` and `ad_personalization`). Instead, the platform leverages behavioral fingerprints and downstream variable mapping to process v2 data:
 
 1. **Multi-Parameter Parameter Binding (`privacy_info.ads_storage`):**
