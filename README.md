@@ -14,11 +14,6 @@ The data is segmented into the following buckets:
 * **Evening**: 8 PM - 11 PM
 * **Lates**: 12 AM - 3 AM
 
-
-This repository contains the industry-standard **Master Consent Mode v2 Audit Query** for BigQuery. It is engineered specifically for digital analytics auditors, privacy officers, and technical sales teams to audit cloud-layer data collection, validate Consent Mode v2 configurations, and spot compliance leaks at scale.
-
----
-
 ## 📖 The Technical Mechanics: How the Code Recognizes Consent Mode v2
 
 When analyzing raw event data inside Google BigQuery, understanding the architectural shifts between Consent Mode v1 and v2 is vital. Google did not modify the flat database schema to add explicit columns for the new v2 privacy fields (`ad_user_data` and `ad_personalization`). Instead, the platform leverages behavioral fingerprints and downstream variable mapping to process v2 data:
