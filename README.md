@@ -5,6 +5,8 @@ This repository contains Big Query code using Google Analytics raw data that wil
 
 This solution utilizes `device.time_zone_offset_seconds` to analyze performance in the **user's actual local time**.
 
+This repository contains Big Query code using Google Analytics raw data allowing to track **Consent Mode v2**. It is engineered specifically to validate **Consent Mode v2** configurations, and spot compliance leaks at scale.
+
 ## DAY PART DEFINITIONS
 The data is segmented into the following buckets:
 * **Early Risers**: 4 AM - 5 AM
