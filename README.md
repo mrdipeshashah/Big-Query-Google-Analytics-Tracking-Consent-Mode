@@ -28,3 +28,38 @@ This master reference grid maps out exactly how browser-layer network requests (
 | **G101** | 🔴 Denied | 🟢 Granted | **`No`** | **`Yes`** | **Partial Consent (Analytics Only):** Google Analytics runs natively with functional cookies, but all Google Ads remarketing lists and personalization arrays are explicitly blocked. |
 | **G110** | 🟢 Granted | 🔴 Denied | **`Yes`** | **`No`** | **Partial Consent (Marketing Only):** Paid advertising loops track conversions via cookies normally, but standard website behavior analytics are restricted to cookieless tracking profiles. |
 | **N/A** | 🛑 Null | 🛑 Null | **`null`** | **`null`** | **Critical Tracking Leakage:** The engine recorded tracking records, but the fields are entirely unassigned. Tags fired before the container received a programmatic default or update signal from the banner. |
+
+## UNDERSTANDING THE PRIVACY_INFO FIELDS
+
+1. analytics_storage
+What it Means & Its Role
+This field determines whether Google Analytics is legally allowed to store or read cookies on the user's browser to track their behavior, count visits, and measure page engagement.
+
+What the Values Mean:
+Yes: Full Tracking Granted. Google Analytics drops a persistent cookie (_ga) on the user’s device. All behavioral actions (clicks, scrolls, conversions) are permanently stitched to a unique user_pseudo_id.
+
+No: Cookieless Modeling Mode Active. No behavioral cookies are read or written. However, if the site runs Advanced Consent Mode v2, GA4 still sends anonymous "cookieless pings" to BigQuery. The data is saved, but personal identifiers like user_pseudo_id and ga_session_id are completely stripped out (null).
+
+null: Untracked / Misconfigured State. The tracking engine recorded an event, but it has no idea what the consent status is. This indicates that your tracking code initialized and fired before the cookie banner (like CookieHub) could pass its default policy settings.
+
+2. ads_storage
+What it Means & Its Role
+This field governs advertising cookies and marketing permissions. In Consent Mode v2, this field carries a massive hidden role: it doesn't just look at basic advertising cookies; Google uses it as a combined metric to evaluate whether a brand has permission to send user data to Google Ads (ad_user_data) and whether that data can be used for remarketing lists and targeted ads (ad_personalization).
+
+What the Values Mean:
+Yes: Advertising Trackers Fully Operational. Google Ads and GA4 can link user actions to ad clicks, build retargeting audiences, and send conversion data directly to Google's ad platforms.
+
+No: Ad Personalization Blocked. Google’s advertising tags are barred from reading or writing advertising cookies. Any cookieless pings that arrive in your database cannot be used for building remarketing audiences or personalized ad tracking.
+
+null: Data Privacy Leakage. The tag fired and recorded an ad-related event profile without checking or assigning a legal consent state. This represents an immediate compliance warning for an enterprise.
+
+3. uses_transient_token
+What it Means & Its Role
+This is an advanced technical parameter that identifies how data was collected when cookies were rejected. A Transient Token is a temporary, short-lived, encrypted session key generated entirely inside a secure server's memory. It lives only for that specific page interaction and self-destructs the absolute millisecond a user closes their tab. It never leaves a physical file footprint on the user's computer.
+
+What the Values Mean:
+Yes: Enterprise Server-Side Architecture. This indicates the client is running a highly sophisticated Server-Side Google Tag Manager (sGTM) setup using a custom Server-to-Server Transient API. When the user clicked "Decline", the site didn't just send standard browser pings; instead, their own private cloud server securely mapped the session using temporary cryptographic tokens to guarantee 100% user privacy.
+
+No: Standard Client-Side/Server-Side Configuration. This is what you see on 99% of normal sites (including your current CookieHub staging site tests). It means the tracking is running via standard browser scripts. When a user declines consent, the system relies on Google's default client-side cookieless pings rather than a custom server-side token architecture.
+
+null: Incomplete Privacy Evaluation. The database engine recorded the interaction, but the data stream completely bypassed the cloud warehouse's compliance evaluation engine.
