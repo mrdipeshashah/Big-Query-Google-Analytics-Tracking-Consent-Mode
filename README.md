@@ -1,10 +1,6 @@
 The BQ code shared is to better understand consent mode and what selection users made around analytics_storage and ads_storage. If Advanced Consent Mode is implemented the values of analytics_storage and ads_storage it could be a mix of Yes, No or null.
 
 # OVERVIEW
-This repository contains Big Query code using Google Analytics raw data that will provide a summary of the Google Analytics data. The data studio dashboard (https://datastudio.google.com/reporting/78e5657c-ac77-4fd9-a2ba-e620bb083c0b) brings many of the insights to life around performance through the lens of user behavior timing. 
-
-This solution utilizes `device.time_zone_offset_seconds` to analyze performance in the **user's actual local time**.
-
 This repository contains Big Query code using Google Analytics raw data allowing to track **Consent Mode v2**. It is engineered specifically to validate **Consent Mode v2** configurations, and spot compliance leaks at scale.
 
 ## DAY PART DEFINITIONS
