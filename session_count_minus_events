@@ -1,0 +1,21 @@
+SELECT
+  event_date,
+  privacy_info.analytics_storage,
+  privacy_info.ads_storage,
+  
+  -- Total absolute unique sessions collapsed cleanly across the day
+  COUNT(DISTINCT 
+    IFNULL(
+      CONCAT(user_pseudo_id, CAST((SELECT value.int_value FROM UNNEST(event_params) WHERE key = 'ga_session_id') AS STRING)), 
+      'cookieless_ping_session'
+    )
+  ) AS clean_total_sessions
+
+FROM
+  `enter.tablename_123456.events_*`
+WHERE
+  _TABLE_SUFFIX BETWEEN '20260529' AND '20260531'
+GROUP BY 
+  1, 2, 3
+ORDER BY 
+  event_date DESC;
