@@ -30,7 +30,6 @@ This master reference grid maps out exactly how browser-layer network requests (
 | **N/A** | 🛑 Null | 🛑 Null | **`null`** | **`null`** | **Critical Tracking Leakage:** The engine recorded tracking records, but the fields are entirely unassigned. Tags fired before the container received a programmatic default or update signal from the banner. |
 
 ## UNDERSTANDING THE PRIVACY_INFO FIELDS
-
 1. analytics_storage
 What it Means & Its Role
 This field determines whether Google Analytics is legally allowed to store or read cookies on the user's browser to track their behavior, count visits, and measure page engagement.
