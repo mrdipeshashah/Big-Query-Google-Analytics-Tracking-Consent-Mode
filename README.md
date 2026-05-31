@@ -21,7 +21,7 @@ When analyzing raw event data inside Google BigQuery, understanding the architec
 
 This master reference grid maps out exactly how browser-layer network requests (`gcs` string payloads) cross-reference to BigQuery outputs, with technical translation for each combination.
 
-| GCS Payload Code | Ad Storage State | Analytics State | BigQuery `ads_storage` | BigQuery `analytics_storage` | Operational Framework State & Sales Insight |
+| GCS Payload Code | Ad Storage State | Analytics State | BigQuery `ads_storage` | BigQuery `analytics_storage` | What it means |
 | :---: | :---: | :---: | :---: | :---: | :--- |
 | **G111** | 🟢 Granted | 🟢 Granted | **`Yes`** | **`Yes`** | **Full Active Consent:** Tags read and write cookies freely. If this state fires *before* a user interacts with the banner, it represents an illegal pre-consent tracker leak. |
 | **G100** | 🔴 Denied | 🔴 Denied | **`No`** | **`No`** | **Advanced Mode Default / Opt-Out:** Cookies are blocked. Tags send completely anonymous cookieless pings to BigQuery for backend conversion modeling. |
