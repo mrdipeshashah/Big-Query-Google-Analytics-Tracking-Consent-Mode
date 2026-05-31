@@ -17,7 +17,7 @@ When analyzing raw event data inside Google BigQuery, understanding the architec
    * **`Yes` / `No` Strings:** Confirms Consent Mode v2 is active and passing structured evaluations.
    * **`null` / Blank Cells:** Indicates unassigned state tracking where tags fired entirely outside of the privacy control wrapper.
 
-## 🔀 The Core Audit Translation Matrix: Frontend vs. Cloud Warehouse
+## THE AUDIT MATRIX: FRONTEND V CLOUD WAREHOUSE 
 
 This master reference grid maps out exactly how browser-layer network requests (`gcs` string payloads) cross-reference to your BigQuery database outputs, along with the technical translation for each combination.
 
