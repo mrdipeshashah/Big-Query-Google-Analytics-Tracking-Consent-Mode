@@ -2,7 +2,7 @@
 This repository contains Big Query code using Google Analytics raw data allowing to track **Consent Mode v2**. It is engineered specifically to validate **Consent Mode v2** configurations, and spot compliance leaks at scale.
 
 ## The Technical Mechanics: How the Code Recognizes Consent Mode v2
-When analyzing raw event data inside Google BigQuery, understanding the architectural shifts between Consent Mode v1 and v2 is vital. Google did not modify the flat database schema to add explicit columns for the new v2 privacy fields (`ad_user_data` and `ad_personalization`). Instead, the platform leverages behavioral fingerprints and downstream variable mapping to process v2 data:
+When analyzing raw event data inside Google BigQuery, understanding the architectural shifts between Consent Mode v1 and v2 is vital. Google did not modify the flat database schema to add explicit columns for the new v2 privacy fields (`ad_user_data` and `ad_personalization`). Instead, the platform leverages behavioral fingerprints, state rulesets, and downstream variable mapping to process v2 data:
 
 1. **Multi-Parameter Parameter Binding (`privacy_info.ads_storage`):**
    In a certified Consent Mode v2 implementation (e.g., CookieHub, OneTrust), the user's frontend interaction with an advertising or marketing toggle simultaneously controls three backend parameters: `ads_storage`, `ad_user_data`, and `ad_personalization`. Google bundles the evaluation of these components and updates the state within the existing `privacy_info.ads_storage` database field. 
