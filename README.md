@@ -31,6 +31,7 @@ This master reference grid maps out exactly how browser-layer network requests (
 
 ## UNDERSTANDING THE PRIVACY_INFO FIELDS
 **analytics_storage**
+
 What it Means & Its Role - This field determines whether Google Analytics is legally allowed to store or read cookies on the user's browser to track their behavior, count visits, and measure page engagement.
 
 What the Values Mean:
@@ -41,6 +42,7 @@ No: Cookieless Modeling Mode Active. No behavioral cookies are read or written. 
 null: Untracked / Misconfigured State. The tracking engine recorded an event, but it has no idea what the consent status is. This indicates that your tracking code initialized and fired before the cookie banner (like CookieHub) could pass its default policy settings.
 
 **ads_storage**
+
 What it Means & Its Role - This field governs advertising cookies and marketing permissions. In Consent Mode v2, this field carries a massive hidden role: it doesn't just look at basic advertising cookies; Google uses it as a combined metric to evaluate whether a brand has permission to send user data to Google Ads (ad_user_data) and whether that data can be used for remarketing lists and targeted ads (ad_personalization).
 
 What the Values Mean:
@@ -51,6 +53,7 @@ No: Ad Personalization Blocked. Google’s advertising tags are barred from read
 null: Data Privacy Leakage. The tag fired and recorded an ad-related event profile without checking or assigning a legal consent state. This represents an immediate compliance warning for an enterprise.
 
 **uses_transient_token**
+
 What it Means & Its Role - This is an advanced technical parameter that identifies how data was collected when cookies were rejected. A Transient Token is a temporary, short-lived, encrypted session key generated entirely inside a secure server's memory. It lives only for that specific page interaction and self-destructs the absolute millisecond a user closes their tab. It never leaves a physical file footprint on the user's computer.
 
 What the Values Mean:
