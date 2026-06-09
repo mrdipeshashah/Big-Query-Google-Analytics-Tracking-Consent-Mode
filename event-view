@@ -8,22 +8,22 @@ SELECT
   -- 1. Total Volume of Hits
   COUNT(*) AS total_events,
   
-  -- 2. Clean User Count (Handles Advanced Cookieless v2 Nulls gracefully)
-  COUNT(DISTINCT IFNULL(user_pseudo_id, 'cookieless_ping_user')) AS unique_users,
+  -- 2. Clean User Count (Handles Advanced Cookieless v2 Nulls gracefully without flattening)
+  COUNT(DISTINCT IFNULL(user_pseudo_id, CONCAT('cookieless_user_', CAST(event_timestamp AS STRING)))) AS unique_users,
   
-  -- 3. Clean Session Count (Handles Advanced Cookieless v2 Nulls gracefully)
+  -- 3. Clean Session Count (Protects low-volume staging counts from collapsing into a single bucket)
   COUNT(DISTINCT 
     IFNULL(
       CONCAT(user_pseudo_id, CAST((SELECT value.int_value FROM UNNEST(event_params) WHERE key = 'ga_session_id') AS STRING)), 
-      'cookieless_ping_session'
+      CONCAT('cookieless_session_', CAST(event_timestamp AS STRING))
     )
   ) AS total_sessions
 
 FROM
-  `enter.tablename_123456.events_*`
+ `enter.tablename_123456.events_*`
 WHERE
   -- Filters to key milestones to spot tracking anomalies easily
-  event_name IN ('session_start', 'purchase')
+  event_name IN ('session_start','add_to_cart','view_item','view_item_list', 'purchase')
 GROUP BY 
   1, 2, 3, 4, 5
 ORDER BY 
