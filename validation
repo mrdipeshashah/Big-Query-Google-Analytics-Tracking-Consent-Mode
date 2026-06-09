@@ -1,0 +1,25 @@
+SELECT
+  event_date,
+  -- 🕒 Cleaned up to simple: YYYY-MM-DD HH:MM:SS
+  FORMAT_TIMESTAMP('%Y-%m-%d %H:%M:%S', TIMESTAMP_MICROS(event_timestamp)) AS event_time,
+  event_name,
+  privacy_info.analytics_storage,
+  privacy_info.ads_storage,
+  privacy_info.uses_transient_token,
+  user_pseudo_id,
+  (SELECT value.int_value FROM UNNEST(event_params) WHERE key = 'ga_session_id') AS ga_session_id,
+
+  -- 💎 Cleaned Validation Key (Stripped of fractional seconds and UTC text)
+  CONCAT(
+    FORMAT_TIMESTAMP('%Y%m%d_%H%M%S', TIMESTAMP_MICROS(event_timestamp)), '_',
+    IFNULL(user_pseudo_id, 'cookieless'), '_',
+    IFNULL(CAST((SELECT value.int_value FROM UNNEST(event_params) WHERE key = 'ga_session_id') AS STRING), 'nosession')
+  ) AS validation_key
+
+FROM
+  `enter.tablename_123456.events_*`
+WHERE
+  -- Filters to your key milestones
+  event_name IN ('session_start','add_to_cart','view_item','view_item_list', 'purchase')
+ORDER BY 
+  event_timestamp DESC;
