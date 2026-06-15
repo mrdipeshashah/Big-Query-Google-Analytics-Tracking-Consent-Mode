@@ -11,7 +11,7 @@ The metrics come from the event-view code shared that will provide the data to b
 
 ### METRIC DICTIONARY 
 
-| ID | Metric Name | Type | Underlying Calculation Logic / Expression | Rule |
+| ID | Metric Name | Type | Calculation Logic / Expression | Rule |
 | :---: | :--- | :--- | :--- | :--- |
 | **1** | **Consented Sessions** | Volume | `SUM(total_sessions)` conditioned by Explicit Consent filter rules. | Inlcude Filter = `analytics_storage = 'Yes'` & `event_name = 'session_start'` |
 | **2** | **Cookieless Recovered Sessions** | Volume | `SUM(total_sessions)` conditioned by Anonymous Mode filter rules. | Inlcude Filter = `analytics_storage = 'No'` & `event_name = 'session_start'` |
