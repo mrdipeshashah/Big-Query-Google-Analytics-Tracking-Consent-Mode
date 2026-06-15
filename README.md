@@ -3,15 +3,13 @@ This repository contains Big Query code using Google Analytics raw data allowing
 
 ## DASHBOARD
 
-https://datastudio.google.com/reporting/c9121e14-d639-4ac8-87ad-21b37f69fe86
+To monitor the impact of consent mode v2. this dashboard (https://datastudio.google.com/reporting/c9121e14-d639-4ac8-87ad-21b37f69fe86) will help quantify the impact 
 
-An enterprise analytics monitoring framework engineered to measure cookie banner conversion rates, audit compliance tracking, and quantify the exact volume of traffic successfully salvaged via GA4 Advanced Consent Mode Behavioral Modeling.
-
-## METRICS 
+## METRICS TO TRACK
 
 The metrics within this dashboard are categorized into Core Volume metrics (driven by Looker Studio asset-level filtering mechanisms) and Analytical Audit metrics (calculated via dynamic field-level logic expressions).
 
-### 1. Metric Reference Dictionary
+### METRIC DICTIONARY 
 
 | ID | Metric Name | Type | Underlying Calculation Logic / Expression | Rule |
 | :---: | :--- | :--- | :--- | :--- |
