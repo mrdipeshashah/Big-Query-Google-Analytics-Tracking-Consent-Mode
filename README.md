@@ -7,7 +7,7 @@ https://datastudio.google.com/reporting/c9121e14-d639-4ac8-87ad-21b37f69fe86
 
 An enterprise analytics monitoring framework engineered to measure cookie banner conversion rates, audit compliance tracking, and quantify the exact volume of traffic successfully salvaged via GA4 Advanced Consent Mode Behavioral Modeling.
 
-## 📊 Core Performance Architecture
+## METRICS 
 
 The metrics within this dashboard are categorized into Core Volume metrics (driven by Looker Studio asset-level filtering mechanisms) and Analytical Audit metrics (calculated via dynamic field-level logic expressions).
 
