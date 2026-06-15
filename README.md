@@ -7,7 +7,7 @@ To monitor the impact of consent mode v2. this dashboard (https://datastudio.goo
 
 ## METRICS TO TRACK
 
-The metrics within this dashboard are categorized into Core Volume metrics (driven by Looker Studio asset-level filtering mechanisms) and Analytical Audit metrics (calculated via dynamic field-level logic expressions).
+The metrics come from the event-view code shared that will provide the data to build the following metrics: 
 
 ### METRIC DICTIONARY 
 
