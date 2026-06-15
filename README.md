@@ -13,14 +13,14 @@ The metrics within this dashboard are categorized into Core Volume metrics (driv
 
 ### 1. Metric Reference Dictionary
 
-| ID | Metric Name | Type | Underlying Calculation Logic / Expression | Documentation Reference / Rule |
+| ID | Metric Name | Type | Underlying Calculation Logic / Expression | Rule |
 | :---: | :--- | :--- | :--- | :--- |
 | **1** | **Consented Sessions** | Volume | `SUM(total_sessions)` conditioned by Explicit Consent filter rules. | Inlcude Filter = `analytics_storage = 'Yes'` & `event_name = 'session_start'` |
 | **2** | **Cookieless Recovered Sessions** | Volume | `SUM(total_sessions)` conditioned by Anonymous Mode filter rules. | Inlcude Filter = `analytics_storage = 'No'` & `event_name = 'session_start'` |
 | **3** | **Total Baseline Sessions** | Volume | `SUM(total_sessions)` conditioned by Baseline Entry filter rules. | Inlcude Filter = `event_name = 'session_start'` |
-| **4** | **Standard Consent Rate** | Calculated | `SUM(CASE WHEN analytics_storage = 'Yes' THEN unique_users ELSE 0 END) / SUM(unique_users)` | User Opt-In Ratio |
-| **5** | **Advanced Consent Rate** | Calculated | `SUM(CASE WHEN analytics_storage = 'No' THEN total_events ELSE 0 END) / SUM(total_events)` | Behavioral Modeling Ratio |
-| **6** | **Critical Leaks** | Calculated | `SUM(CASE WHEN analytics_storage = 'null' AND event_name = 'session_start' THEN total_sessions ELSE 0 END)` | Zero-Compliance Alerts |
+| **4** | **Standard Consent Rate** -| Calculated | `SUM(CASE WHEN analytics_storage = 'Yes' THEN unique_users ELSE 0 END) / SUM(unique_users)` | n/a |
+| **5** | **Advanced Consent Rate** | Calculated | `SUM(CASE WHEN analytics_storage = 'No' THEN total_events ELSE 0 END) / SUM(total_events)` | n/a |
+| **6** | **Critical Leaks** | Calculated | `SUM(CASE WHEN analytics_storage = 'null' AND event_name = 'session_start' THEN total_sessions ELSE 0 END)` | n/a |
 
 ## HOW CONSENT MODE V2 IS RECOGNISED 
 When analyzing raw event data inside Google BigQuery, understanding the architectural shifts between Consent Mode v1 and v2 is vital. The platform leverages behavioral fingerprints, state rulesets, and downstream variable mapping to process v2 data:
