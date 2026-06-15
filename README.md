@@ -1,6 +1,10 @@
 # OVERVIEW
 This repository contains Big Query code using Google Analytics raw data allowing to track **Consent Mode v2**. It is engineered specifically to validate **Consent Mode v2** configurations, and spot compliance leaks at scale.
 
+## DASHBOARD
+
+https://datastudio.google.com/reporting/c9121e14-d639-4ac8-87ad-21b37f69fe86
+
 ## HOW CONSENT MODE V2 IS RECOGNISED 
 When analyzing raw event data inside Google BigQuery, understanding the architectural shifts between Consent Mode v1 and v2 is vital. The platform leverages behavioral fingerprints, state rulesets, and downstream variable mapping to process v2 data:
 
