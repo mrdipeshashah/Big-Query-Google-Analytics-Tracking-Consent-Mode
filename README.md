@@ -30,7 +30,7 @@ When analyzing raw event data inside Google BigQuery, understanding the architec
    * **Under v1 Rules:** If a user clicked "Decline", tags were completely blocked on the client side. **Zero rows were ever written to BigQuery.**
    * **Under Advanced v2 Rules:** Google introduces secure **cookieless pings**. When a user denies consent, GA4 still securely transmits hit-level data to the cloud database while stripping out user identifiers. 
    
-   *Therefore, the mere presence of rows in your query results displaying an explicit `No` status for analytics or advertising storage is structural database proof that the engine recognizes and executes the Advanced Consent Mode v2 framework.*
+   *The query results displaying an explicit `No` status for analytics or advertising storage is structural database proof that the engine recognizes and executes the Advanced Consent Mode v2 framework.*
 
 3. **Database Flag Population States:**
    * **`Yes` / `No` Strings:** Confirms Consent Mode v2 is active and passing structured evaluations.
