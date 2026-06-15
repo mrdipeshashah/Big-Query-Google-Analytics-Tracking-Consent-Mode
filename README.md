@@ -5,6 +5,25 @@ This repository contains Big Query code using Google Analytics raw data allowing
 
 https://datastudio.google.com/reporting/c9121e14-d639-4ac8-87ad-21b37f69fe86
 
+An enterprise analytics monitoring framework engineered to measure cookie banner conversion rates, audit compliance tracking, and quantify the exact volume of traffic successfully salvaged via GA4 Advanced Consent Mode Behavioral Modeling.
+
+---
+
+## 📊 Core Performance Architecture
+
+The metrics within this dashboard are categorized into Core Volume metrics (driven by Looker Studio asset-level filtering mechanisms) and Analytical Audit metrics (calculated via dynamic field-level logic expressions).
+
+### 1. Metric Reference Dictionary
+
+| ID | Metric Name | Type | Underlying Calculation Logic / Expression | Documentation Reference |
+| :---: | :--- | :--- | :--- | :--- |
+| **1** | **Consented Sessions** | Volume | Asset-level inclusion rules tracking positive user intent. | See `image_0c9805.png` |
+| **2** | **Cookieless Recovered Sessions** | Volume | Asset-level inclusion rules isolating anonymous pings. | See `image_02a262.png` |
+| **3** | **Total Baseline Sessions** | Volume | Comprehensive asset-level tracking summary of baseline traffic. | See `image_029f5c.png` |
+| **4** | **Standard Consent Rate** | Calculated | `SUM(CASE WHEN analytics_storage = 'Yes' THEN unique_users ELSE 0 END) / SUM(unique_users)` | User Opt-In Ratio |
+| **5** | **Advanced Consent Rate** | Calculated | `SUM(CASE WHEN analytics_storage = 'No' THEN total_events ELSE 0 END) / SUM(total_events)` | Behavioral Modeling Ratio |
+| **6** | **Critical Leaks** | Calculated | `SUM(CASE WHEN analytics_storage = 'null' AND event_name = 'session_start' THEN total_sessions ELSE 0 END)` | Zero-Compliance Alerts |
+
 ## HOW CONSENT MODE V2 IS RECOGNISED 
 When analyzing raw event data inside Google BigQuery, understanding the architectural shifts between Consent Mode v1 and v2 is vital. The platform leverages behavioral fingerprints, state rulesets, and downstream variable mapping to process v2 data:
 
