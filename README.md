@@ -38,18 +38,6 @@ When analyzing raw event data inside Google BigQuery, understanding the architec
 
 ## THE AUDIT MATRIX: FRONTEND V CLOUD WAREHOUSE 
 
-This master reference grid maps out exactly how browser-layer network requests (`gcs` string payloads) cross-reference to BigQuery outputs, with technical translation for each combination.
-
-| GCS Payload Code | Ad Storage State | Analytics State | BigQuery `ads_storage` | BigQuery `analytics_storage` | What it means |
-| :---: | :---: | :---: | :---: | :---: | :--- |
-| **G111** | 🟢 Granted | 🟢 Granted | **`Yes`** | **`Yes`** | **Full Active Consent:** Tags read and write cookies freely. If this state fires *before* a user interacts with the banner, it represents an illegal pre-consent tracker leak. |
-| **G100** | 🔴 Denied | 🔴 Denied | **`No`** | **`No`** | **Advanced Mode Default / Opt-Out:** Cookies are blocked. Tags send completely anonymous cookieless pings to BigQuery for backend conversion modeling. |
-| **G101** | 🔴 Denied | 🟢 Granted | **`No`** | **`Yes`** | **Partial Consent (Analytics Only):** Google Analytics runs natively with functional cookies, but all Google Ads remarketing lists and personalization arrays are explicitly blocked. |
-| **G110** | 🟢 Granted | 🔴 Denied | **`Yes`** | **`No`** | **Partial Consent (Marketing Only):** Paid advertising loops track conversions via cookies normally, but standard website behavior analytics are restricted to cookieless tracking profiles. |
-| **N/A** | 🛑 Null | 🛑 Null | **`null`** | **`null`** | **Critical Tracking Leakage:** The engine recorded tracking records, but the fields are entirely unassigned. Tags fired before the container received a programmatic default or update signal from the banner. |
-
-### The Audit Matrix: Frontend Payload vs. Cloud Data Warehouse
-
 This master reference grid maps out exactly how browser-layer network requests (`gcs` and `gcd` string payloads) cross-reference to BigQuery outputs, along with the technical translation for each combination.
 
 | GCS Code | GCD Signature | Ad Storage State | Analytics State | BigQuery `ads_storage` | BigQuery `analytics_storage` | What it means / Cookieless Output |
