@@ -50,6 +50,22 @@ This master reference grid maps out exactly how browser-layer network requests (
 
 > 📌 **Audit Pro-Tip:** Do not rely solely on the BigQuery `privacy_info` columns during an audit. An integration mismatch (`13l3l3...`) will often result in a `null` or unconfigured state in the data warehouse, which can be misread as a compliant advanced mode opt-out. Always cross-reference the frontend `gcd` network signature to confirm if GTM actually received the user's choice.
 
+### The `gcd` Character Encoder Key (Default vs. Updated States)
+
+The `gcd` string isolates the status of each tracking consent feature using a rigid coordinate mapping system. The individual letter in each positional slot indicates what the **Default** setting was, cross-referenced with what the user's **Explicit Update** action was.
+
+| Default Status | Updated: Missing / No Action | Updated: Explicitly Denied | Updated: Explicitly Granted |
+| :--- | :---: | :---: | :---: |
+| **Missing / Not Set** | `l` | `m` | `n` |
+| **Denied** | `p` | `q` | `r` |
+| **Granted** | `t` | `u` | `v` |
+
+#### How to Read the String Structure:
+The numbers and letters in a string like `13p3p3p3p5l1` follow a locked sequence separating the tracking features:
+`1` `3` **[ad_storage]** `3` **[analytics_storage]** `3` **[ad_user_data]** `3` **[ad_personalization]** `5` **[ad_data_redaction]**
+
+* **Example Breakdown (`13p3p3p3p5l1`):** Every core tracking slot contains a `p`. Looking at the encoder grid above, `p` translates to **Denied by Default** with an **Updated status of Missing** (meaning the page loaded in a denied state, but the user hasn't interacted with or clicked the cookie banner yet).
+
 ## UNDERSTANDING THE PRIVACY_INFO FIELDS
 privacy_info fields in Big Query are split into 3: 
 
