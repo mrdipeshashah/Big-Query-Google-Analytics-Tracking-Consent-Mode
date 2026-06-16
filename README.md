@@ -1,5 +1,5 @@
 # OVERVIEW
-This repository contains Big Query code using Google Analytics raw data allowing to track **Consent Mode v2**. It is engineered specifically to validate **Consent Mode v2** configurations, and spot compliance leaks at scale. This repository also explains the finer details in how Big Query tracks consent mode 
+This repository helps to better understand and monitor **Consent Mode v2**. It is engineered specifically to validate **Consent Mode v2** configurations, and spot compliance leaks at scale. 
 
 ## DASHBOARD
 
