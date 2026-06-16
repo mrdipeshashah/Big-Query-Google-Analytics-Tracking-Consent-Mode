@@ -48,7 +48,7 @@ This master reference grid maps out exactly how browser-layer network requests (
 | **G110** | `13r3q3r3r5l1` | 🟢 Granted | 🔴 Denied | **Yes** | **No** | **Partial Consent (Marketing Only):** Paid advertising loops track conversions natively, but website behavior analytics are restricted to cookieless tracking profiles. |
 | **N/A** | `13l3l3l3l1l1` | 🔴 Null | 🔴 Null | **null** | **null** | **Integration Mismatch (Critical Leak):** The tag manager fired before receiving a default or update status signal from the banner. |
 
-> 📌 **Audit Pro-Tip:** Do not rely solely on the BigQuery `privacy_info` columns during an audit. An integration mismatch (`13l3l3...`) will often result in a `null` or unconfigured state in the data warehouse, which can be misread as a compliant advanced mode opt-out. Always cross-reference the frontend `gcd` network signature to confirm if GTM actually received the user's choice.
+> 📌 **Audit Pro-Tip:** Do not rely solely on BigQuery `privacy_info`. An integration mismatch (`13l3l3l3l1l1`) will often result in a `null` or unconfigured state in Big Query, which can be misread as a compliant advanced mode opt-out. Always cross-reference the frontend `gcd` network signature to confirm if GTM actually received the user's choice.
 
 ### THE GCD CHARACTER ENCODER (DEFAULT V UPDATED STATUS)
 
