@@ -54,7 +54,7 @@ This master reference grid maps out exactly how browser-layer network requests (
 
 | GCS Code | GCD Signature | Ad Storage State | Analytics State | BigQuery `ads_storage` | BigQuery `analytics_storage` | What it means / Cookieless Output |
 | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| **G111** | `13r3r3r3r5l1` or `13v3v3v3v5l1` <br> `13v3v...` | 🟢 Granted | 🟢 Granted | **Yes** | **Yes** | **Full Active Consent:** Tags read/write cookies freely. If this fires *before* interaction, it represents an illegal pre-consent tracker leak. |
+| **G111** | `13r3r3r3r5l1` or `13v3v3v3v5l1` | 🟢 Granted | 🟢 Granted | **Yes** | **Yes** | **Full Active Consent:** Tags read/write cookies freely. If this fires *before* interaction, it represents an illegal pre-consent tracker leak. |
 | **G100** | `13q3q3q3q5l1` | 🔴 Denied | 🔴 Denied | **No** | **No** | **Advanced Mode Default / Opt-Out:** Cookies are blocked. Tags send anonymous cookieless pings. `user_pseudo_id` and `ga_session_id` are exported as `null`. |
 | **G101** | `13q3r3q3q5l1` | 🔴 Denied | 🟢 Granted | **No** | **Yes** | **Partial Consent (Analytics Only):** Google Analytics runs natively with functional cookies, but all Google Ads remarketing and personalization arrays are explicitly blocked. |
 | **G110** | `13r3q3r3r5l1` | 🟢 Granted | 🔴 Denied | **Yes** | **No** | **Partial Consent (Marketing Only):** Paid advertising loops track conversions natively, but website behavior analytics are restricted to cookieless tracking profiles. |
