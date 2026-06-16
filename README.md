@@ -50,7 +50,7 @@ This master reference grid maps out exactly how browser-layer network requests (
 
 > 📌 **Audit Pro-Tip:** Do not rely solely on the BigQuery `privacy_info` columns during an audit. An integration mismatch (`13l3l3...`) will often result in a `null` or unconfigured state in the data warehouse, which can be misread as a compliant advanced mode opt-out. Always cross-reference the frontend `gcd` network signature to confirm if GTM actually received the user's choice.
 
-### The `gcd` Character Encoder Key (Default vs. Updated States)
+### THE GCD CHARACTER ENCODER (DEFAULT V UPDATED STATUS)
 
 The `gcd` string isolates the status of each tracking consent feature using a rigid coordinate mapping system. The individual letter in each positional slot indicates what the **Default** setting was, cross-referenced with what the user's **Explicit Update** action was.
 
