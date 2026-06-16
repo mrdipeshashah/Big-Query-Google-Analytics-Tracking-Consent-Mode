@@ -54,10 +54,10 @@ This master reference grid maps out exactly how browser-layer network requests (
 
 | GCS Code | GCD Signature | Ad Storage State | Analytics State | BigQuery `ads_storage` | BigQuery `analytics_storage` | What it means / Cookieless Output |
 | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| **G111** | `13r3r...` <br> `13v3v...` | 🟢 Granted | 🟢 Granted | **Yes** | **Yes** | **Full Active Consent:** Tags read/write cookies freely. If this fires *before* interaction, it represents an illegal pre-consent tracker leak. |
-| **G100** | `13q3q...` | 🔴 Denied | 🔴 Denied | **No** | **No** | **Advanced Mode Default / Opt-Out:** Cookies are blocked. Tags send anonymous cookieless pings. `user_pseudo_id` and `ga_session_id` are exported as `null`. |
-| **G101** | `13q3q...r...` | 🔴 Denied | 🟢 Granted | **No** | **Yes** | **Partial Consent (Analytics Only):** Google Analytics runs natively with functional cookies, but all Google Ads remarketing and personalization arrays are explicitly blocked. |
-| **G110** | `13r3r...q...` | 🟢 Granted | 🔴 Denied | **Yes** | **No** | **Partial Consent (Marketing Only):** Paid advertising loops track conversions natively, but website behavior analytics are restricted to cookieless tracking profiles. |
+| **G111** | `13r3r3r3r5l1` or `13v3v3v3v5l1` <br> `13v3v...` | 🟢 Granted | 🟢 Granted | **Yes** | **Yes** | **Full Active Consent:** Tags read/write cookies freely. If this fires *before* interaction, it represents an illegal pre-consent tracker leak. |
+| **G100** | `13q3q3q3q5l1` | 🔴 Denied | 🔴 Denied | **No** | **No** | **Advanced Mode Default / Opt-Out:** Cookies are blocked. Tags send anonymous cookieless pings. `user_pseudo_id` and `ga_session_id` are exported as `null`. |
+| **G101** | `13q3r3q3q5l1` | 🔴 Denied | 🟢 Granted | **No** | **Yes** | **Partial Consent (Analytics Only):** Google Analytics runs natively with functional cookies, but all Google Ads remarketing and personalization arrays are explicitly blocked. |
+| **G110** | `13r3q3r3r5l1` | 🟢 Granted | 🔴 Denied | **Yes** | **No** | **Partial Consent (Marketing Only):** Paid advertising loops track conversions natively, but website behavior analytics are restricted to cookieless tracking profiles. |
 | **N/A** | `13l3l3l3l1l1` | 🔴 Null | 🔴 Null | **null** | **null** | **Integration Mismatch (Critical Leak):** The tag manager fired before receiving a default or update status signal from the banner. |
 
 > 📌 **Audit Pro-Tip:** Do not rely solely on the BigQuery `privacy_info` columns during an audit. An integration mismatch (`13l3l3...`) will often result in a `null` or unconfigured state in the data warehouse, which can be misread as a compliant advanced mode opt-out. Always cross-reference the frontend `gcd` network signature to confirm if GTM actually received the user's choice.
