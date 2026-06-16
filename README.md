@@ -32,11 +32,11 @@ When analyzing raw event data inside Google BigQuery, understanding the architec
    
    *The query results displaying an explicit `No` status for analytics or advertising storage is structural database proof that the engine recognizes and executes the Advanced Consent Mode v2 framework.*
 
-3. **Database Flag Population States:**
+3. **States:**
    * **`Yes` / `No` Strings:** Confirms Consent Mode v2 is active and passing structured evaluations.
    * **`null` / Blank Cells:** Indicates unassigned state tracking where tags fired entirely outside of the privacy control wrapper.
 
-## THE AUDIT MATRIX: FRONTEND V CLOUD WAREHOUSE 
+## THE AUDIT MATRIX: FRONTEND V BIG QUERY 
 
 This master reference grid maps out exactly how browser-layer network requests (`gcs` and `gcd` string payloads) cross-reference to BigQuery outputs, along with the technical translation for each combination.
 
