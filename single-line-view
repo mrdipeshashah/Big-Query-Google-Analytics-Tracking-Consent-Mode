@@ -1,18 +1,33 @@
 SELECT
-  -- 1. Total rows with session_start (Your original Baseline card)
-  SUM(CASE WHEN event_name = 'session_start' THEN total_sessions ELSE 0 END) AS original_baseline_scorecard,
+  -- 1. Total Baseline Sessions (Matching image_b78248.png scorecards)
+  COUNT(DISTINCT CASE 
+    WHEN event_name = 'session_start' 
+    THEN (SELECT value.int_value FROM UNNEST(event_params) WHERE key = 'ga_session_id') 
+  END) AS original_baseline_scorecard,
 
   -- 2. Total Consented sessions (analytics_storage = 'Yes')
-  SUM(CASE WHEN event_name = 'session_start' AND analytics_storage = 'Yes' THEN total_sessions ELSE 0 END) AS consented_sessions,
+  COUNT(DISTINCT CASE 
+    WHEN event_name = 'session_start' AND privacy_info.analytics_storage = 'Yes' 
+    THEN (SELECT value.int_value FROM UNNEST(event_params) WHERE key = 'ga_session_id') 
+  END) AS consented_sessions,
 
   -- 3. Total Cookieless sessions (analytics_storage = 'No')
-  SUM(CASE WHEN event_name = 'session_start' AND analytics_storage = 'No' THEN total_sessions ELSE 0 END) AS cookieless_recovered_sessions,
+  COUNT(DISTINCT CASE 
+    WHEN event_name = 'session_start' AND privacy_info.analytics_storage = 'No' 
+    THEN (SELECT value.int_value FROM UNNEST(event_params) WHERE key = 'ga_session_id') 
+  END) AS cookieless_recovered_sessions,
 
-  -- 4. Total Leaks (analytics_storage = 'null')
-  SUM(CASE WHEN event_name = 'session_start' AND analytics_storage = 'null' THEN total_sessions ELSE 0 END) AS critical_leak_sessions,
+  -- 4. Total Leaks / Unknown (analytics_storage IS NULL)
+  COUNT(DISTINCT CASE 
+    WHEN event_name = 'session_start' AND privacy_info.analytics_storage IS NULL 
+    THEN (SELECT value.int_value FROM UNNEST(event_params) WHERE key = 'ga_session_id') 
+  END) AS critical_leak_sessions,
 
   -- 5. The Perfect Math Check (Consented + Cookieless)
-  SUM(CASE WHEN event_name = 'session_start' AND analytics_storage IN ('Yes', 'No') THEN total_sessions ELSE 0 END) AS expected_new_baseline
+  COUNT(DISTINCT CASE 
+    WHEN event_name = 'session_start' AND privacy_info.analytics_storage IN ('Yes', 'No') 
+    THEN (SELECT value.int_value FROM UNNEST(event_params) WHERE key = 'ga_session_id') 
+  END) AS expected_new_baseline
 
 FROM `enter.tablename_123456.events_*`
-WHERE event_date BETWEEN '20260101' AND '20260130';
+WHERE _TABLE_SUFFIX BETWEEN '20260101' AND '20260130';
